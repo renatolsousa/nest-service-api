@@ -1,21 +1,12 @@
-import { Controller, Get, Param, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  token: string;
+  constructor(private readonly appService: AppService) {}
 
-  constructor() {
-    this.token = '98sd7fs6df54sd6f5s7df9';
-  }
-
-  @Get('/:token')
-  checkToken(@Param('token') token: string): any {
-    if (token != this.token) {
-      throw new UnauthorizedException('access denied');
-    }
-    return {
-      status: true,
-      message: 'access granted',
-    };
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
   }
 }
