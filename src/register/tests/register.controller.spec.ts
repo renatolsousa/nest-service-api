@@ -3,6 +3,7 @@ import { CreateRegisterDto } from '../dto/create-register.dto';
 import { Register } from '../register.entity';
 import { RegisterController } from '../register.controller';
 import { RegisterService } from '../register.service';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 const registerEntityList: Register[] = [
   new Register({
@@ -30,6 +31,12 @@ describe('RegisterController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        ThrottlerModule.forRoot({
+          ttl: 60,
+          limit: 10,
+        }),
+      ],
       controllers: [RegisterController],
       providers: [
         {
