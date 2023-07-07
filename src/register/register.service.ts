@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateRegisterDto } from './dto/create-register.dto';
 import { UpdateRegisterDto } from './dto/update-register.dto';
-import { Register, RegisterDocument } from './entities/register.entity';
+import { Register, RegisterDocument } from './register.entity';
 
 @Injectable()
 export class RegisterService {
@@ -25,11 +25,15 @@ export class RegisterService {
     return this.registerRepository.findById(id);
   }
 
-  async update(id: number, updateRegisterDto: UpdateRegisterDto) {
-    return `This action updates a #${id} register`;
+  async update(id: string, updateRegisterDto: UpdateRegisterDto) {
+    return await this.registerRepository.findByIdAndUpdate(
+      id,
+      updateRegisterDto,
+    );
   }
 
-  async remove(id: number) {
-    return this.registerRepository.deleteOne({ id: id });
+  async remove(id: string) {
+    this.registerRepository.deleteOne({ id: id });
+    return true;
   }
 }

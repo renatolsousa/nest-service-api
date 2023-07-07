@@ -35,11 +35,11 @@ export class RegisterController {
     @Param('id') id: string,
     @Body() updateRegisterDto: UpdateRegisterDto,
   ) {
-    return this.registerService.update(+id, updateRegisterDto);
+    return this.registerService.update(id, updateRegisterDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.registerService.remove(+id);
+    return this.registerService.remove(id);
   }
 }

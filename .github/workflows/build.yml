@@ -1,4 +1,4 @@
-name: Build
+name: Nest CI
 on:
   push:
     branches:

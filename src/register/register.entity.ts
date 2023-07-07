@@ -7,9 +7,6 @@ export type RegisterDocument = Register & mongoose.Document;
 @Schema({ timestamps: true })
 export class Register {
   @ApiProperty()
-  id: string;
-
-  @ApiProperty()
   @Prop({ required: true })
   name: string;
 
@@ -22,7 +19,6 @@ export class Register {
   active: boolean;
 
   constructor(register?: Partial<Register>) {
-    this.id = register?.id;
     this.name = register?.name;
     this.email = register?.email;
     this.active = register?.active;
