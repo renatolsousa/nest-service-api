@@ -6,23 +6,22 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  unitytests:
-    name: Unity Tests
-    runs-on: ubuntu-18.04
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18
-          
-      - name: Install dependencies
-        run: npm install
-
-      - name: Test and coverage
-        run: npm run test
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+      - run: npm test
       
   sonarcloud:
     name: SonarCloud
