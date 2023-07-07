@@ -6,9 +6,9 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
+  unitytests:
+    name: Unity Tests
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,7 +23,14 @@ jobs:
 
       - name: Test and coverage
         run: npm run test
-
+      
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
