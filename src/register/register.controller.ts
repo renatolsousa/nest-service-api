@@ -27,7 +27,7 @@ export class RegisterController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.registerService.findOne(+id);
+    return this.registerService.findOne(id);
   }
 
   @Patch(':id')

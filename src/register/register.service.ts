@@ -21,7 +21,7 @@ export class RegisterService {
     return this.registerRepository.find().exec();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return this.registerRepository.findById(id);
   }
 
