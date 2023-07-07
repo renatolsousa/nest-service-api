@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { RegisterService } from './register.service';
 import { CreateRegisterDto } from './dto/create-register.dto';
 import { UpdateRegisterDto } from './dto/update-register.dto';
 
+@UseGuards(ThrottlerGuard)
 @Controller('register')
 export class RegisterController {
   constructor(private readonly registerService: RegisterService) {}

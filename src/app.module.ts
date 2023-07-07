@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RegisterModule } from './register/register.module';
 import configuration from './config/configuration';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -23,6 +24,10 @@ import configuration from './config/configuration';
       inject: [ConfigService],
     }),
     RegisterModule,
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
