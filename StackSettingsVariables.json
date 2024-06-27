@@ -1,0 +1,24 @@
+{
+    "stack_name": "neurons",
+    "app_name": "mono-service",
+    "api_name": "mono",
+    "app_port": 3005,
+    "region": "us-east-1",
+    "domains": {
+        "name": "app.dev.domain.ai",
+        "dev": "app.dev.domain.ai",
+        "staging": "app.staging.domain.ai",
+        "prod": "app.domain.ai"
+    },
+    "auto_scaling": {
+        "minContainers": 1,
+        "maxContainers": 2,
+        "cpuUtilization": 70,
+        "memoryUtilization": 70,
+        "requestsPerContainer": 1000
+    },
+    "cw_log_retention": {
+        "dev": "one_week",
+        "prod": "one_week"
+    }
+}
